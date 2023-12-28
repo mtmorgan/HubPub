@@ -40,7 +40,8 @@
 #'     DispatchClass = "Rda",
 #'     Location_Prefix = "s3://annotationhub/",
 #'     RDataPath = "ENCODExplorerData/encode_df_lite.rda",
-#'     Tags = "ENCODE:Homo sapiens"
+#'     Tags = "ENCODE:Homo sapiens",
+#'     Licenses = "GPL-2:LGPL-2"
 #' )
 #'
 #' ## add the record to the metadata
@@ -51,6 +52,7 @@ add_resource <- function(package, fields, metafile = "metadata.csv")
 {
     .metadata_validate(fields)
     fields[["Tags"]] <- list(fields[["Tags"]])
+    fields[["Licenses"]] <- list(fields[["Licenses"]])
 
     ## read in the metadata.csv file
     metafile <- metafile
@@ -68,6 +70,7 @@ add_resource <- function(package, fields, metafile = "metadata.csv")
     biocviews <- descrip[,"biocViews"]
     terms <- strsplit(biocviews, ",[[:space:]]*")[[1]]
     tags <- strsplit(fields$Tags[[1]], ":")[[1]]
+    licenses <- strsplit(fields$Licenses[[1]], ":")[[1]]
 
     if ("AnnotationHub" %in% terms)
         AnnotationHubData::AnnotationHubMetadata(
@@ -88,6 +91,7 @@ add_resource <- function(package, fields, metafile = "metadata.csv")
             Location_Prefix = fields$Location_Prefix,
             RDataPath = fields$RDataPath,
             Tags = tags,
+            Licenses = licenses,
             RDataDateAdded = Sys.time(),
             Recipe = NA_character_)   
     else if ("ExperimentHub" %in% terms)

@@ -15,7 +15,8 @@
     DispatchClass = character(1),
     Location_Prefix = character(1),
     RDataPath = character(1),
-    Tags = character()
+    Tags = character(),
+    Licenses = character()
 )
 
 
@@ -126,6 +127,9 @@
 #' @param Tags `character()` Zero or more tags describing the data, colon 
 #'     `:` separated.
 #'
+#' @param Licenses `character()` Zero or more licenses describing the data, 
+#'     colon `:` separated.
+#'
 #' @return None
 #' @examples
 #' hub_metadata()
@@ -147,7 +151,8 @@
 #'     DispatchClass = "Rda",
 #'     Location_Prefix = NA_character_,
 #'     RDataPath = "ENCODExplorerData/encode_df_lite.rda",
-#'     Tags = c("ENCODE", "Homo sapiens")
+#'     Tags = c("ENCODE", "Homo sapiens"),
+#'     Licenses = c("GPL-2", "LGPL-2")
 #' )
 #'
 #' @export
@@ -168,7 +173,8 @@ hub_metadata <- function(
     DispatchClass = character(1),
     Location_Prefix = character(1),
     RDataPath = character(1),
-    Tags = character())
+    Tags = character(),
+    Licenses = character())
 {
     BiocVersion <- package_version(BiocVersion)
     SourceVersion <- tryCatch({
@@ -193,7 +199,8 @@ hub_metadata <- function(
         DispatchClass = DispatchClass,
         Location_Prefix = Location_Prefix,
         RDataPath = RDataPath,
-        Tags = Tags
+        Tags = Tags,
+        Licenses = Licenses
     )
     .metadata_validate(metadata)
     metadata
@@ -217,6 +224,7 @@ hub_metadata <- function(
 
     metadata$BiocVersion <- package_version(metadata$BiocVersion)
     metadata$Tags <- strsplit(metadata$Tags, ",[ ]*")
+    metadata$Licenses <- strsplit(metadata$Licenses, ",[ ]*")
 
     metadata
 }
@@ -227,6 +235,9 @@ hub_metadata <- function(
     metadata$BiocVersion <- as.character(metadata$BiocVersion)
     metadata$Tags <- vapply(
         metadata$Tags, paste, character(1), collapse = ", "
+    )
+    metadata$Licenses <- vapply(
+        metadata$Licenses, paste, character(1), collapse = ", "
     )
     write.csv(metadata, file = path, row.names = FALSE)
 }
