@@ -21,7 +21,8 @@ hub_metadata(
   DispatchClass = character(1),
   Location_Prefix = character(1),
   RDataPath = character(1),
-  Tags = character()
+  Tags = character(),
+  Licenses = character()
 )
 }
 \arguments{
@@ -72,7 +73,9 @@ Length must match the length of \code{RDataPath}.}
 \item{DispatchClass}{\code{character(1)} Determines how data are loaded into R.
 The value for this field should be \code{Rda} if the data were serialized with
 \code{save()} and \code{Rds} if serialized with \code{saveRDS}. The filename should have
-the appropriate \code{rda} or \code{rds} extension.\preformatted{A number of dispatch classes are pre-defined in 
+the appropriate \code{rda} or \code{rds} extension.
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{A number of dispatch classes are pre-defined in 
 AnnotationHub/R/AnnotationHubResource-class.R with the suffix `Resource`.
 For example, if you have sqlite files, the AnnotationHubResource-class.R
 defines SQLiteFileResource so the DispatchClass would be SQLiteFile. 
@@ -81,7 +84,7 @@ use. The function `AnnotationHub::DispatchClassList()` will output a
 matrix of currently implemented DispatchClass and brief description of 
 utility. If a predefine class does not seem appropriate contact 
 maintainer@bioconductor.org.
-}}
+}\if{html}{\out{</div>}}}
 
 \item{Location_Prefix}{\code{character(1)} URL location of AWS S3 bucket or web
 site where resource is located.}
@@ -99,6 +102,9 @@ files.}
 
 \item{Tags}{\code{character()} Zero or more tags describing the data, colon
 \code{:} separated.}
+
+\item{Licenses}{\code{character()} Zero or more licenses describing the data,
+colon \code{:} separated.}
 }
 \value{
 None
@@ -129,7 +135,8 @@ tst <- hub_metadata(
     DispatchClass = "Rda",
     Location_Prefix = NA_character_,
     RDataPath = "ENCODExplorerData/encode_df_lite.rda",
-    Tags = c("ENCODE", "Homo sapiens")
+    Tags = c("ENCODE", "Homo sapiens"),
+    Licenses = c("GPL-2", "LGPL-2")
 )
 
 }

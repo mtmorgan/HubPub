@@ -47,7 +47,8 @@ meta <- hub_metadata(
     DispatchClass = "Rda",
     Location_Prefix = "s3://annotationhub/",
     RDataPath = "ENCODExplorerData/encode_df_lite.rda",
-    Tags = "ENCODE:Homo sapiens"
+    Tags = "ENCODE:Homo sapiens",
+    Licenses = "GPL-2:LGPL-2"
 )
 
 ## add the record to the metadata

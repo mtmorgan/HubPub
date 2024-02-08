@@ -105,7 +105,8 @@ metadata <- hub_metadata(
     DispatchClass = "Rda",
     Location_Prefix = "s3://experimenthub/",
     RDataPath = "ENCODExplorerData/encode_df_lite.rda",
-    Tags = "ENCODE:Homo sapiens"
+    Tags = "ENCODE:Homo sapiens",
+    Licenses = "GPL-2"
 )
 
 add_resource(file.path(fl, "examplePkg"), metadata)

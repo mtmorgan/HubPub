@@ -27,11 +27,12 @@ test_that("`add_resource()` works",
         DispatchClass = "Rda",
         Location_Prefix = "s3://annotationhub/",
         RDataPath = "ENCODExplorerData/encode_df_lite.rda",
-        Tags = "ENCODE:Homo sapiens"
+        Tags = "ENCODE:Homo sapiens",
+        Licenses = "GPL-2"
     )
     add_resource(paste0(fl, "/tstResourcePkg"), metadata)
     meta2 <- read.csv(meta_path)
-    expect_identical(dim(meta2), c(1L, 17L))
+    expect_identical(dim(meta2), c(1L, 18L))
     expect_identical(meta2[[1]], "ENCODE")
     expect_true(is.na(meta2[[4]]))
 
